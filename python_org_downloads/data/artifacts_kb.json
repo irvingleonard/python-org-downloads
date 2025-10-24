@@ -1,6 +1,6 @@
 {
     "source-release": {
-        "pattern_fstring": "^(?:-(?P<debug>Debug))?\\.(?P<format>({'|'.join((key.replace('.', '\\.') for key in format.keys()))}))$",
+        "pattern_fstring": "^(?:-(?P<debug>Debug))?\\.(?P<format>({'|'.join((key.replace('.', r'\\.') for key in format.keys()))}))$",
         "map": {
             "format": {
                 "tar.xz": "tarball_lzma",
@@ -13,7 +13,7 @@
         }
     },
     "macos-release": {
-        "pattern_fstring": "^(?P<post_build>post\\d+)?(?:-(?P<options>no-lto))?(?:(-|_)macosx?(?P<min_macos>(?:\\d+(?:\\.\\d+)?)?-?(?:\\d\\d\\d\\d-\\d\\d?-\\d\\d?)?)?)?(?:_(?P<revision>rev\\d+))?\\.(?P<format>({'|'.join((key.replace('.', '\\.') for key in format.keys()))}))$",
+        "pattern_fstring": "^(?P<post_build>post\\d+)?(?:-(?P<options>no-lto))?(?:(-|_)macosx?(?P<min_macos>(?:\\d+(?:\\.\\d+)?)?-?(?:\\d\\d\\d\\d-\\d\\d?-\\d\\d?)?)?)?(?:_(?P<revision>rev\\d+))?\\.(?P<format>({'|'.join((key.replace('.', r'\\.') for key in format.keys()))}))$",
         "map": {
             "format": {
                 "pkg": "installer_package",
@@ -22,7 +22,7 @@
         }
     },
     "windows-release": {
-        "pattern_fstring": "^(?:(-|.)(?P<post_build>(\\d+|post\\d+)))?(?P<free_threaded>t)?(?:-(?P<test>test))?(?:-(?P<embed>(embeddable|embed)))?(?:(-|\\.)(?P<arch>({'|'.join(arch.keys())})))?(?:-(?P<webinstall>webinstall))?\\.(?P<format>({'|'.join((key.replace('.', '\\.') for key in format.keys()))}))$",
+        "pattern_fstring": "^(?:(-|.)(?P<post_build>(\\d+|post\\d+)))?(?P<free_threaded>t)?(?:-(?P<test>test))?(?:-(?P<embed>(embeddable|embed)))?(?:(-|\\.)(?P<arch>({'|'.join(arch.keys())})))?(?:-(?P<webinstall>webinstall))?\\.(?P<format>({'|'.join((key.replace('.', r'\\.') for key in format.keys()))}))$",
         "pattern_defaults": {
             "arch": "win32"
         },
@@ -49,7 +49,7 @@
         "pattern_fstring": "^(?:(-|\\.)(?P<arch>(amd64|arm64|win32|x86|ia64)))?(?:-(?P<pdb>pdb))\\.(?P<format>(exe|msi|zip))$"
     },
     "android-release": {
-        "pattern_fstring": "^-(?P<arch>({'|'.join(arch.keys())}))-linux-android\\.(?P<format>({'|'.join((key.replace('.', '\\.') for key in format.keys()))}))$",
+        "pattern_fstring": "^-(?P<arch>({'|'.join(arch.keys())}))-linux-android\\.(?P<format>({'|'.join((key.replace('.', r'\\.') for key in format.keys()))}))$",
         "map": {
             "format": {
                 "tar.gz": "tarball_deflate"
