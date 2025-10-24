@@ -18,7 +18,7 @@ from rich.table import Table
 DATA_DIRECTORY_NAME = 'data'
 LOGGER = getLogger(__name__)
 
-__version__ = '1.0.0'
+__version__ = '1.0.0.dev0'
 
 def load_artifacts_kb(original_class, kb_file_name='artifacts_kb.json'):
 	"""Decorator for PythonOrgArtifact
