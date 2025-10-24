@@ -1,5 +1,5 @@
 [build-system]
-requires = ['pip', 'setuptools', 'wheel', 'tomli', 'simplifiedapp']
+requires = ['pip', 'setuptools', 'wheel', 'tomli', 'simplifiedapp', 'beautifulsoup4', 'requests']
 build-backend = 'setuptools.build_meta:__legacy__'
 
 [project]
@@ -26,6 +26,8 @@ classifiers = [
 ]
 dependencies = [
 	'beautifulsoup4',
+	'requests',
+	'rich',
 	'simplifiedapp',
 ]
 
