@@ -43,3 +43,6 @@ repository = 'https://github.com/irvingleonard/python-org-downloads.git'
 
 [tool.setuptools.packages.find]
 include = ['python_org_downloads*']
+
+[tool.setuptools.package-data]
+"*" = ["*.json"]
