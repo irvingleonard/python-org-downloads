@@ -10,7 +10,8 @@ from re import compile as re_compile, match as re_match
 from sys import modules as sys_modules
 from tempfile import mkdtemp
 
-from bs4 import BeautifulSoup
+# from bs4 import BeautifulSoup
+import bs4
 from requests import get as requests_get
 from rich.console import Console
 from rich.table import Table
@@ -60,7 +61,7 @@ def update_artifact_version_extensions(original_class):
 		if 'map' in format_details:
 			for extension in format_details['map'].get('format', {}).keys():
 				extensions.add(extension)
-	original_class.RELEASE_FILE_REGEXP = original_class._RELEASE_FILE_REGEXP_TEMPLATE.format(extensions='|'.join((key.replace('.', '\.') for key in extensions)))
+	original_class.RELEASE_FILE_REGEXP = original_class._RELEASE_FILE_REGEXP_TEMPLATE.format(extensions='|'.join((key.replace('.', r'\.') for key in extensions)))
 	return original_class
 
 
@@ -283,7 +284,7 @@ class PythonOrgDownloads:
 		:rtype: list[NormalizedPythonVersion]
 		"""
 
-		base_url_soup = BeautifulSoup(requests_get(cls.BASE_URL).text, features='html.parser')
+		base_url_soup = bs4.BeautifulSoup(requests_get(cls.BASE_URL).text, features='html.parser')
 		release_directories = set()
 		for a_link in base_url_soup.find_all('a'):
 			try:
@@ -310,7 +311,7 @@ class PythonOrgDownloads:
 		:rtype: list[PythonOrgArtifact]
 		"""
 
-		directory_soup = BeautifulSoup(requests_get('/'.join((cls.BASE_URL, str(relative_path)))).text, features='html.parser')
+		directory_soup = bs4.BeautifulSoup(requests_get('/'.join((cls.BASE_URL, str(relative_path)))).text, features='html.parser')
 		release_artifacts = []
 		links_in_dir = [a_link.attrs['href'] for a_link in directory_soup.find_all('a')]
 		for a_link in links_in_dir:
