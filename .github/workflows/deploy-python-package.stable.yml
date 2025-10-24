@@ -1,0 +1,36 @@
+# This workflow builds and uploads python artifacts
+
+name: Publish Production Package
+on:
+  push:
+    branches:
+      - stable
+
+jobs:
+  build-n-publish-package:
+    permissions:
+      actions: write
+      contents: write
+      id-token: write
+    uses: irvingleonard/reusable-workflows/.github/workflows/python-build-publish-stable-package.yml@v1
+    with:
+      package-name: ${{ vars.PACKAGE_NAME }}
+      env-name: Production
+    secrets:
+      github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  publish-to-pypi:
+    needs: build-n-publish-package
+    if: needs.build-n-publish-package.outputs.result == 'built'
+    permissions:
+      id-token: write
+    runs-on: ubuntu-latest
+    environment: Production
+    steps:
+      - name: Getting Build
+        uses: actions/download-artifact@v5
+        with:
+          name: build
+
+      - name: Publish package distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
